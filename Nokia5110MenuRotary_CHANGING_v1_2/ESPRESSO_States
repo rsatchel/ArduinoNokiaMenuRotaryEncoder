@@ -1,0 +1,64 @@
+
+State1:
+			IDLE, waiting for brew switch
+			If Brew Switch ON Tare Scales and GOTO State2
+State2:
+			Turn Pump ON
+			Initialise Timer
+			GOTO State3
+			
+State3:
+			Check time for PulseDuration length
+			If exceeded move to State4
+			
+State4:
+			Turn Pump OFF
+			Initialise Timer 
+			GOTO State 5			
+
+State5:
+			If BrewSwitch OFF - flush mode
+
+			else check for pulse gap duration
+			if exceeded, GOTO State6
+
+State6:
+			if need to do more preinfuse pulses GOTO State2
+			else GOTO State7
+
+State7:
+			Read Brew Switch
+			if OFF, GOTO State 1
+
+			else keep extracting GOTO State8
+
+State8:
+			CHeck for 500ms elapsed if YES GOTO State9
+
+State9:
+			Report data
+
+State10:
+			Count num data points
+			If numDataPoints less than needed GOTO State7
+			else goto State 11
+State11:
+			Turn BrewSwitch OFF
+			Buzzer ON
+			
+State12:
+			Wait for	2 sec Buzzer interval
+			if exceeded GOTO State13
+
+State13:
+			Buzzer OFF
+			GOTO State14
+
+State14:
+			If 3 sec passed GOTO State15
+			else GOTO State11
+
+State15:
+			Read brewSwitch
+			if OFF GOTO State1
+			else GOTO State11
